@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,7 +25,11 @@ public class ConsultationServiceImpl implements ConsultationService{
 
     @Override
     public Consultation getConsultationById(UUID consultationId) {
-        return null;
+       Optional<Consultation> consultation = consultationRepository.findById(consultationId) ;
+       if(consultation.isPresent()){
+           return consultation.get();
+       }
+       return null;
     }
 
     @Override
