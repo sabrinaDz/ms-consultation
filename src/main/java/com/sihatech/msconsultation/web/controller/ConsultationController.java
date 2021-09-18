@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,4 +34,8 @@ public class ConsultationController {
         return new ResponseEntity<Consultation>(consultationService.getConsultationById(consultationId),HttpStatus.OK);
     }
 
+    @GetMapping("/consultationsByPatientId/{patientId}")
+    public ResponseEntity<List<Consultation>>getConsultationsByPatientId(@PathVariable("patientId") UUID patientId){
+        return new ResponseEntity<List<Consultation>>(consultationService.getConsultationsByPatientId(patientId),HttpStatus.OK);
+    }
 }

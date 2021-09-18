@@ -34,7 +34,8 @@ public class ConsultationServiceImpl implements ConsultationService{
 
     @Override
     public List<Consultation> getConsultationsByPatientId(UUID patientId) {
-        return null;
+
+        return consultationRepository.getConsultationsByPatientId(patientId);
     }
 
     @Override
