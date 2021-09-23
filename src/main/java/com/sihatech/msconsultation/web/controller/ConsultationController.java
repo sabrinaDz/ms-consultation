@@ -38,4 +38,9 @@ public class ConsultationController {
     public ResponseEntity<List<Consultation>>getConsultationsByPatientId(@PathVariable("patientId") UUID patientId){
         return new ResponseEntity<List<Consultation>>(consultationService.getConsultationsByPatientId(patientId),HttpStatus.OK);
     }
+
+    @GetMapping("/consultationsByPhysicianId/{physicianId}")
+        public ResponseEntity<List<Consultation>>getConsultationsByPhysiciansId(@PathVariable("physicianId") UUID physiciansId){
+        return new ResponseEntity<List<Consultation>>(consultationService.getConsultationsByPhysicianId(physiciansId),HttpStatus.OK);
+    }
 }
