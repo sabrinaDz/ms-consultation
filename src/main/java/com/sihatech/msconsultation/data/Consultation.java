@@ -27,6 +27,9 @@ public class Consultation {
     private UUID id;
     private LocalDate dateConsultation;
 
+    private  String differentialDiagnosis;
+    private String provisionalDiagnosis;
+    private String diagnosis;
     private UUID patientId;
     private UUID physicianId;
 
