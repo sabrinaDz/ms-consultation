@@ -2,8 +2,11 @@ package com.sihatech.msconsultation.web.controller;
 
 
 import com.sihatech.msconsultation.data.Consultation;
+import com.sihatech.msconsultation.data.ConsultationDto;
+import com.sihatech.msconsultation.prescription.model.PrescriptionDto;
 import com.sihatech.msconsultation.repository.ConsultationRepository;
 import com.sihatech.msconsultation.service.ConsultationService;
+import com.sihatech.msconsultation.service.prescriptions.PrescriptionsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,13 @@ import java.util.UUID;
 public class ConsultationController {
 
     private ConsultationService consultationService;
+    private PrescriptionsService prescriptionsService;
 
 
-    public ConsultationController(ConsultationService consultationService) {
-        this.consultationService=consultationService;    }
+    public ConsultationController(ConsultationService consultationService, PrescriptionsService prescriptionsService) {
+        this.consultationService = consultationService;
+        this.prescriptionsService = prescriptionsService;
+    }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,5 +48,14 @@ public class ConsultationController {
     @GetMapping("/consultationsByPhysicianId/{physicianId}")
         public ResponseEntity<List<Consultation>>getConsultationsByPhysiciansId(@PathVariable("physicianId") UUID physiciansId){
         return new ResponseEntity<List<Consultation>>(consultationService.getConsultationsByPhysicianId(physiciansId),HttpStatus.OK);
+    }
+
+    @GetMapping("/detailsConsultation/{consultationId}")
+    public ResponseEntity<ConsultationDto>getConsultationDetailsByConsultationId(@PathVariable("consultationId") UUID consultationId){
+        PrescriptionDto prescriptions=prescriptionsService.getPrescriptionsByConsultationId(consultationId);
+        ConsultationDto consultationDto=new ConsultationDto();
+        consultationDto.setId(consultationId);
+        consultationDto.setPrescriptionDto(prescriptions);
+        return new ResponseEntity<>(consultationDto,HttpStatus.OK);
     }
 }
