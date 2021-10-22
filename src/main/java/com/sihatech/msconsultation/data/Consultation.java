@@ -1,6 +1,7 @@
 package com.sihatech.msconsultation.data;
 
 
+import com.sihatech.msconsultation.prescription.model.PrescriptionDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +33,9 @@ public class Consultation {
     private String diagnosis;
     private UUID patientId;
     private UUID physicianId;
+
+
+
+
 
 }
